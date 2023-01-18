@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import '../App.css';
 import { useState } from "react";
 import { FaTrash, FaEdit, FaSave } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
 
-function TodoList() {
+function TodoList(props) {
     const [todos, setTodos] = useState("")
     const [todosList, setTodosList] = useState([])
 
     const addTodos = () => {
-        if (todos.length !== 0) { setTodosList(prevTodosList => [...prevTodosList, todos]) }
+        if (todos.length !== 0) { setTodosList(prevTodosList => [...prevTodosList, todos])}
         setTodos("");
     }
-    console.log("todolist")
-    useEffect(() => { console.log(todosList) }, [todosList])
+
+    useEffect(() => { console.log("todo", todosList) }, [todosList])
 
     return (
         <div style={{ margin: "50p 50px", padding: "10px 10px", backgroundColor: "aliceblue", textAlign: "center" }}>
@@ -37,15 +38,24 @@ function TodoList() {
                     Add
                 </button>
             </div>
-            <div style={{}} >
+            <div style={{ display: "flex", flexDirection: "column", padding: "30px 200px" }} >
                 {todosList.map(
                     (todosItem) =>
                         <div key={todosItem}>
-                            <div>
-                                <label style={{ fontSize: "18px", marginRight: "25px" }}>{todosItem}</label>
-                                <FaTrash onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
-                                <FaEdit onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
-                                <FaSave onClick={() => addTodos()} style={{ width: "25", height: "25" }} />
+                            <div >
+                                <input type={"checkbox"} style={{
+                                    float: "left"
+                                }} />
+                                <label
+                                    style={{
+                                        fontSize: "18px",
+                                    }}>
+                                    {todosItem}</label>
+                                <div style={{ display: "flex", float: "right" }}>
+                                    <FaTrash onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
+                                    <FaEdit onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
+                                    <FaSave onClick={() => addTodos()} style={{ width: "25", height: "25" }} />
+                                </div>
                             </div>
                         </div>)}
             </div>
