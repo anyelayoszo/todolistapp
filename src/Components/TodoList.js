@@ -4,16 +4,16 @@ import { useState } from "react";
 import { FaTrash, FaEdit, FaSave } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 
-function TodoList(props) {
+function TodoList() {
     const [todos, setTodos] = useState("")
     const [todosList, setTodosList] = useState([])
 
     const addTodos = () => {
-        if (todos.length !== 0) { setTodosList(prevTodosList => [...prevTodosList, todos])}
+        if (todos.length !== 0) { setTodosList(prevTodosList => [...prevTodosList, {id: uuidv4(), todos: todos}])}
         setTodos("");
     }
 
-    useEffect(() => { console.log("todo", todosList) }, [todosList])
+    useEffect(() => console.log("todo", todosList))
 
     return (
         <div style={{ margin: "50p 50px", padding: "10px 10px", backgroundColor: "aliceblue", textAlign: "center" }}>
@@ -38,7 +38,7 @@ function TodoList(props) {
                     Add
                 </button>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", padding: "30px 200px" }} >
+            <div style={{ display: "flex", flexDirection: "column", padding: "30px 200px", marginBottom:"100px" }} >
                 {todosList.map(
                     (todosItem) =>
                         <div key={todosItem}>
@@ -50,7 +50,8 @@ function TodoList(props) {
                                     style={{
                                         fontSize: "18px",
                                     }}>
-                                    {todosItem}</label>
+                                    {todosItem.todos}</label>
+                                    
                                 <div style={{ display: "flex", float: "right" }}>
                                     <FaTrash onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
                                     <FaEdit onClick={() => addTodos()} style={{ width: "25", height: "25", marginRight: "10px" }} />
