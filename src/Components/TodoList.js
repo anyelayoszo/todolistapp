@@ -14,7 +14,7 @@ function TodoList() {
             setTodosList(prevTodosList => [...prevTodosList, {
                 id: uuidv4(),
                 todos: todos,
-                
+
                 isCompleted: false
             }])
         }
@@ -40,27 +40,8 @@ function TodoList() {
             todosItem));
     }
 
-    const checkedStyle = {
-        fontSize: "18px",
-        float: "left",
-        width: "500px",
-        textAlign: "start",
-        marginLeft: "15px",
-        marginRight: "15px",
-        textDecoration: "line-through"
-    }
-
-    const notCheckedStyle = {
-        fontSize: "18px",
-        float: "left",
-        width: "500px",
-        textAlign: "start",
-        marginLeft: "15px",
-        marginRight: "15px"
-    }
-
     useEffect(() => console.log("todos", todosList, "edittedTodo", edittedTodo, "checkTodos", checkTodos, "deleteTodos", deleteTodos, "editTodos", editTodos, "saveTodos", saveTodos))
-   
+
     return (
         <div style={{ margin: "50p 50px", padding: "10px 10px", backgroundColor: "aliceblue", textAlign: "center" }}>
             <p style={{ marginRight: "50px", fontSize: "18px", fontWeight: "bold" }}>TODOS</p>
@@ -117,8 +98,16 @@ function TodoList() {
                                         }} /> :
                                     <label
                                         key={todosItem.id}
-                                        style={todosItem.isChecked ? checkedStyle : notCheckedStyle}
-                                        >
+                                        style={{
+                                            fontSize: "18px",
+                                            float: "left",
+                                            width: "500px",
+                                            textAlign: "start",
+                                            marginLeft: "15px",
+                                            marginRight: "15px",
+                                            ...(todosItem.isChecked ? {textDecoration: "line-through"} : {})
+                                        }}
+                                    >
                                         {todosItem.todos}</label>
                                 }
                                 <div style={{ display: "flex", flexDirection: "row", float: "right", alignItems: "center" }}>
