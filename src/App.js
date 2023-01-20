@@ -23,22 +23,30 @@ function App() {
     setTodos("");
   }
 
+  const newPrev = [...todosList]
+
   const checkTodos = (id) => {
-    setTodosList(todosList => todosList.map(todosItem => todosItem.id === id ?
-      ({ ...todosItem, isChecked: !todosItem.isChecked }) : todosItem));
+    setTodosList(todosList => {
+      return newPrev.map(todosItem => todosItem.id === id ?
+      ({ ...todosItem, isChecked: !todosItem.isChecked }) : todosItem)});
   }
   const deleteTodos = (id) => {
-    setTodosList(todosList => todosList.filter(todosItem => todosItem.id !== id));
+    setTodosList(todosList => {
+      return newPrev.filter(todosItem => todosItem.id !== id)});
   }
   const editTodos = (id) => {
-    setTodosList(todosList => todosList.map(todosItem => todosItem.id === id ?
-      ({ ...todosItem, isEditable: true }) : todosItem));
+    setTodosList(todosList => {
+      return newPrev.map(todosItem => todosItem.id === id ?
+        ({ ...todosItem, isEditable: true }) : todosItem)
+    });
   }
   const saveTodos = (id) => {
-    setTodosList(todosList => todosList.map(todosItem => todosItem.id === id ?
-      ({ ...todosItem, todos: edittedTodo, isEditable: false }) : todosItem));
+    setTodosList(todosList => {
+      return newPrev.map(todosItem => todosItem.id === id ?
+      ({ ...todosItem, todos: edittedTodo, isEditable: false }) : todosItem)});
   }
-
+  //console.log("todos", todosList, "todosItem.edittedTodo", edittedTodo)
+  console.log(todosList)
   return (
     <div>
       <Header title="TodoAPP" />

@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import '../App.css';
-import { useState } from "react";
 import { FaTrash, FaEdit, FaSave } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
 
 function TodoList(props) {
-
+    console.log(props)
     return (
         <div>
             {props.list.map(
@@ -28,9 +26,8 @@ function TodoList(props) {
                             {todosItem.isEditable ?
                                 <input
                                     type="text"
-                                    placeholder={todosItem.todos}
                                     onChange={(e) => props.seteditted(e.target.value)}
-                                    value={todosItem.props.editted}
+                                    defaultValue={todosItem.todos}
                                     style={{
                                         fontSize: "15px",
                                         float: "left",
